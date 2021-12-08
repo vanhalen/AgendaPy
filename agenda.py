@@ -20,8 +20,12 @@ AGENDA['Rafael'] = {
 
 
 def mostrar_contatos():
-    for contato in AGENDA:
-        buscar_contato(contato)
+    if AGENDA:
+        for contato in AGENDA:
+            buscar_contato(contato)
+            print("-------------------------------------")
+    else:
+        print('\n\n\n\nAgenda vazia!!!')
         print("-------------------------------------")
 
 
@@ -56,7 +60,10 @@ def criar_contato(contato, telefone, email, endereco):
 
 
 def editar_contato(contato, telefone, email, endereco):
-    salvar_contato(contato, telefone, email, endereco, 'u')
+    if (contato in AGENDA):
+        salvar_contato(contato, telefone, email, endereco, 'u')
+    else:
+        print("Esse contato não existe!")
 
 
 def deletar_contato(contato):
@@ -67,14 +74,68 @@ def deletar_contato(contato):
         print("Esse contato não existe!")
 
 
-# buscar_contato('Rodrigo')
-print('####### AGENDA #######')
-criar_contato('Maria', '11 94555-9988',
-              'maria@maria.com', 'Rua Datileira, 22')
-print('######################')
-editar_contato('Rodrigo', '11 91111-2222',
-               'edit@edit.com', 'Rua Editada, 589')
-print('######################')
-deletar_contato('Rafael')
-print('######################')
-mostrar_contatos()
+def imprimir_menu():
+    print('1 - Mostrar todos os contatos')
+    print('2 - Buscar contato')
+    print('3 - Criar contato')
+    print('4 - Editar contato')
+    print('5 - Deletar contato')
+    print('0 - Fechar agenda')
+    print('Pressione Enter - Mostrar Menu')
+
+
+# Roda o programa
+def agenda():
+    escolha_menu = input("Digite uma opção:")
+
+    if(escolha_menu == ''):
+        imprimir_menu()
+    elif(escolha_menu == '1'):
+        mostrar_contatos()
+    elif(escolha_menu == '2'):
+        contato = input('Digite o nome do contato:')
+        print('\n')
+        buscar_contato(contato)
+    elif(escolha_menu == '3'):
+        print('\n### Criar contato ###\n')
+        contato = input('Nome:')
+        telefone = input('Telefone:')
+        email = input('E-mail:')
+        endereco = input('Endereço:')
+        print('\n')
+        criar_contato(contato, telefone, email, endereco)
+    elif(escolha_menu == '4'):
+        print('\n### Editar contato ###\n')
+        contato = input('Digite o nome do contato:')
+        telefone = input('Telefone:')
+        email = input('E-mail:')
+        endereco = input('Endereço:')
+        print('\n')
+        editar_contato(contato, telefone, email, endereco)
+    elif(escolha_menu == '5'):
+        contato = input('Digite o nome do contato:')
+        deletar_contato(contato)
+    elif(escolha_menu == '0' or escolha_menu == 'exit' or escolha_menu == 'fechar'):
+        return  # break caso for usar em um loop
+    else:
+        print("Comando não encontrado! Tente novamente ^^")
+
+    print('\n')
+    agenda()
+
+
+def run():
+    print('\n\n\n\n\n\n\n\n\n\n\n\n')
+    print('########################')
+    print('@@@@@@@@@@@@@@@@@@@@@@@@')
+    print('Bem vindo ao AgendaPy!!!')
+    print('@@@@@@@@@@@@@@@@@@@@@@@@')
+    print('########################')
+    print('\n')
+    imprimir_menu()
+    print('\n')
+    agenda()
+    print('\n')
+
+
+run()
