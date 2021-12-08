@@ -14,11 +14,19 @@ AGENDA['Rafael'] = {
 
 def mostrar_contatos():
     for contato in AGENDA:
+        buscar_contato(contato)
+        print("-------------------------------------")
+
+
+def buscar_contato(contato):
+    if (contato in AGENDA):
         print("Nome:", contato)
         print("Telefone:", AGENDA[contato]['telefone'])
         print("Email:", AGENDA[contato]['email'])
         print("Endereço:", AGENDA[contato]['endereco'])
-        print("-------------------------------------")
+    else:
+        print("Esse contato não existe!")
 
 
-mostrar_contatos()
+# mostrar_contatos()
+buscar_contato('Rodrigo')
