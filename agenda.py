@@ -30,12 +30,13 @@ def mostrar_contatos():
 
 
 def buscar_contato(contato):
-    if (contato in AGENDA):
+    #    if (contato in AGENDA): # Poderia ser esse if para validar
+    try:
         print("Nome:", contato)
         print("Telefone:", AGENDA[contato]['telefone'])
         print("Email:", AGENDA[contato]['email'])
         print("Endereço:", AGENDA[contato]['endereco'])
-    else:
+    except:
         print("Esse contato não existe!")
 
 
@@ -55,8 +56,16 @@ def salvar_contato(contato, telefone, email, endereco, tipo):
     print("Contato {} {} com sucesso!".format(contato, tipo))
 
 
-def criar_contato(contato, telefone, email, endereco):
-    salvar_contato(contato, telefone, email, endereco, 'i')
+def criar_contato(contato):
+    try:
+        AGENDA[contato]
+        print("O contato {} já existe!".format(contato))
+    except:
+        telefone = input('Telefone:')
+        email = input('E-mail:')
+        endereco = input('Endereço:')
+        print('\n')
+        salvar_contato(contato, telefone, email, endereco, 'i')
 
 
 def editar_contato(contato, telefone, email, endereco):
@@ -99,11 +108,7 @@ def agenda():
     elif(escolha_menu == '3'):
         print('\n### Criar contato ###\n')
         contato = input('Nome:')
-        telefone = input('Telefone:')
-        email = input('E-mail:')
-        endereco = input('Endereço:')
-        print('\n')
-        criar_contato(contato, telefone, email, endereco)
+        criar_contato(contato)
     elif(escolha_menu == '4'):
         print('\n### Editar contato ###\n')
         contato = input('Digite o nome do contato:')
