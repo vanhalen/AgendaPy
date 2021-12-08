@@ -28,5 +28,16 @@ def buscar_contato(contato):
         print("Esse contato não existe!")
 
 
+def incluir_contato(contato, telefone, email, endereco):
+    AGENDA[contato] = {
+        'telefone': telefone,
+        'email': email,
+        'endereco': endereco,
+    }
+    print("Contato {} adicionado com sucesso!".format(contato))
+
+
 # mostrar_contatos()
-buscar_contato('Rodrigo')
+incluir_contato('Maria', '11 94555-9988',
+                'maria@maria.com', 'Rua Datileira, 22')
+buscar_contato('Maria')
