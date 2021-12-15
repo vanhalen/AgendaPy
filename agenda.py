@@ -11,13 +11,6 @@ AGENDA['Rafael'] = {
     'endereco': 'Av. Eloah Cabral Saueia, 251',
 }
 
-# def valida_contato(contato):
-#     if (contato in AGENDA):
-#         return True
-#     else:
-#         print("Esse contato não existe!")
-#         return False
-
 
 def mostrar_contatos():
     if AGENDA:
@@ -83,12 +76,28 @@ def deletar_contato(contato):
         print("Esse contato não existe!")
 
 
+def exportar_agenda():
+    pasta = '2.python/1.projeto1/agendapy/'
+    nome_arquivo = 'agenda.csv'
+    try:
+        with open(pasta+nome_arquivo, 'w') as arquivo:
+            arquivo.write("Nome,Telefone,E-mail,Endereço\n")
+            for contato in AGENDA:
+                arquivo.write("{};{};{};{}\n".format(
+                    contato, AGENDA[contato]['telefone'], AGENDA[contato]['email'], AGENDA[contato]['endereco']))
+            print('\n>>>>', nome_arquivo, 'exportada com sucesso!')
+    except Exception as error:
+        print("Erro ao exportar o arquivo")
+        print(error)
+
+
 def imprimir_menu():
     print('1 - Mostrar todos os contatos')
     print('2 - Buscar contato')
     print('3 - Criar contato')
     print('4 - Editar contato')
     print('5 - Deletar contato')
+    print('6 - Exportar contatos (.CSV)')
     print('0 - Fechar agenda')
     print('Pressione Enter - Mostrar Menu')
 
@@ -120,6 +129,8 @@ def agenda():
     elif(escolha_menu == '5'):
         contato = input('Digite o nome do contato:')
         deletar_contato(contato)
+    elif(escolha_menu == '6'):
+        exportar_agenda()
     elif(escolha_menu == '0' or escolha_menu == 'exit' or escolha_menu == 'fechar'):
         return  # break caso for usar em um loop
     else:
