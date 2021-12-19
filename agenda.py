@@ -93,16 +93,18 @@ def exportar_contatos():
 
 def importar_contatos():
     pasta = '2.python/1.projeto1/agendapy/'
-    nome_arquivo = 'agenda.csv'
+    nome_arquivo = 'importar.csv'
     try:
-        with open(pasta+nome_arquivo, 'w') as arquivo:
-            arquivo.write("Nome,Telefone,E-mail,Endereço\n")
-            for contato in AGENDA:
-                arquivo.write("{};{};{};{}\n".format(
-                    contato, AGENDA[contato]['telefone'], AGENDA[contato]['email'], AGENDA[contato]['endereco']))
-            print('\n>>>>', nome_arquivo, 'exportada com sucesso!')
+        with open(pasta+nome_arquivo, 'r') as arquivo:
+            linhas = arquivo.readlines()
+            for linha in linhas:
+                nome = linha.strip().split(';')[0]
+                telefone = linha.strip().split(';')[1]
+                email = linha.strip().split(';')[2]
+                endereco = linha.strip().split(';')[3]
+                salvar_contato(nome, telefone, email, endereco, 'i')
     except Exception as error:
-        print("Erro ao exportar o arquivo")
+        print("Erro ao importar o arquivo")
         print(error)
 
 
