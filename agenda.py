@@ -1,16 +1,19 @@
 AGENDA = {}
 
-AGENDA['Rodrigo'] = {
-    'telefone': '11 94222-3859',
-    'email': 'rodrigorrchagas@gmail.com',
-    'endereco': 'Rua Henrique Casela, 58',
+AGENDA['Eduardo'] = {
+    'telefone': '11 95223-6139',
+    'email': 'eduardomoraes@gmail.com',
+    'endereco': 'Rua Majubera Luli, 12',
 }
 AGENDA['Rafael'] = {
-    'telefone': '11 95333-4960',
-    'email': 'rafael.sa@gmail.com',
-    'endereco': 'Av. Eloah Cabral Saueia, 251',
+    'telefone': '11 95111-5560',
+    'email': 'rafaelsantana@gmail.com',
+    'endereco': 'Alameda dos Ajos, 66',
 }
 
+# Caso a exportarção de arquivos esteja dando erro
+# informe qui a pasta correta do projeto
+PASTA = ''
 
 def mostrar_contatos():
     if AGENDA:
@@ -77,10 +80,9 @@ def deletar_contato(contato):
 
 
 def exportar_contatos():
-    pasta = '2.python/1.projeto1/agendapy/'
     nome_arquivo = 'agenda.csv'
     try:
-        with open(pasta+nome_arquivo, 'w') as arquivo:
+        with open(PASTA+nome_arquivo, 'w') as arquivo:
             arquivo.write("Nome;Telefone;E-mail;Endereço\n")
             for contato in AGENDA:
                 arquivo.write("{};{};{};{}\n".format(
@@ -92,10 +94,9 @@ def exportar_contatos():
 
 
 def importar_contatos():
-    pasta = '2.python/1.projeto1/agendapy/'
     nome_arquivo = 'importar.csv'
     try:
-        with open(pasta+nome_arquivo, 'r') as arquivo:
+        with open(PASTA+nome_arquivo, 'r') as arquivo:
             linhas = arquivo.readlines()
             for linha in linhas:
                 nome = linha.strip().split(';')[0]
